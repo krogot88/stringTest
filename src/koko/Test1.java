@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Test1 {
-	private static int cycles = 2_000_000;
+	private static int cycles = 1_000_000;
 	private static List<String> listForPool = new ArrayList<String>();
 	private static List<String> listForHeap = new ArrayList<String>();
 
@@ -18,8 +18,9 @@ public class Test1 {
 		String s = null;
 		Long time = 0L;
 		for (int i = 0; i < cycles; i++) {
+			String temp = Integer.toString(i);
 			long timeStart = System.currentTimeMillis();
-			s = Integer.toString(i);
+			s = temp.intern();
 			long timeEnd = System.currentTimeMillis();
 			time = time + (timeEnd - timeStart);
 			listForPool.add(s);
@@ -31,8 +32,9 @@ public class Test1 {
 		String s = null;
 		Long time = 0L;
 		for (int i = 0; i < cycles; i++) {
+			String temp = Integer.toString(i);
 			long timeStart = System.currentTimeMillis();
-			s = new String(Integer.toString(i));
+			s = new String(temp);
 			long timeEnd = System.currentTimeMillis();
 			time = time + (timeEnd - timeStart);
 			listForHeap.add(s);
